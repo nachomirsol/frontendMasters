@@ -58,6 +58,7 @@ class LinkedList {
       this.length--;
       return head.value;
     }
+
     const node = this._find(index - 1, this._testIndex);
 
     const excise = node.next;

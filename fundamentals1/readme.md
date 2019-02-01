@@ -101,8 +101,9 @@ Queues are useful for lots of programming problems. How about print jobs? Usuall
 
 There are also priority queues as well. In a priority queue you also assign a priority to the elements that are enqueued. Items that have higher priorities get dequeued first. This is useful for networking; some packets are more important than others. If you're streaming video, that gets a high priority because getting a packet later means likely skipping some frames, whereas syncing to Dropbox can wait for a lull in network traffic to continue syncing.
 
-## ARRAY LIST
+### ARRAY LIST
 
+Individual spaces in memory.
 We are going to talk about two types of implementations of array, ArrayList and LinkedList (terms we're borrowing from Java.) What we're going to do is to approximate how these work underneath the hood; in reality since JavaScript is a garbage-collected language that you don't have worry about allocation and de-allocation, it is simplified.
 
 ArrayList is done by directly interacting with an allocated piece of memory. You then interact with that allocated piece of memory by addressing the specific indices in the array. In other words, you just treat it like a normal array. However things get a bit more complicated when deleting items from an ArrayList: you have to collapse the list down to the spot where you deleted.
@@ -116,11 +117,13 @@ ArrayList is done by directly interacting with an allocated piece of memory. You
 
 Your index is descriptive of where to go to get the thing you are looking for. Shifting array elements like insert into array something or delete elements in an array becomes expensive because all the elements have to move.
 
-## LINKED LIST
+### LINKED LIST
+
+Although a linked list is similar to an array, it is not restricted to a declared number of elements. Additionally, unlike an array which stores data contiguously in memory or on disk, a linked list can easily insert or remove elements without reallocation or reorganization of the entire structure because the data items need not be stored contiguously. We must access nodes sequentially starting from the first one. Therefore, we cannot do a binary search on a linked list. So for searching element is slow.
 
 For our second data structure, we're going to implement a LinkedList. LinkedList is made of a bunch of nodes that point to the next one in the list. Every node in a LinkedLists has two properties, the value of whatever is being store and a pointer to the next node in the list.
 
-gETS ARE RE
+GETS ARE EXPENSIVE
 
 LinkedLists have their ups and downs. On one hand, adding and removing is a breeze: you just have the change the next pointer on the previous node and that's it. Getting is a pain though: if .get is called you have to loop through the nodes until you get to the right node. And that's the tradeoff between LinkedList and ArrayList: LinkedList's adds and deletes are O(1) but the gets are O(n); ArrayList's adds and deletes are O(n) but the gets are O(1). So which one is better? It depends! If you're doing a bunch of adds and deletes but not many gets, stick to LinkedLists. Doing a bunch of gets? ArrayLists. Both? You decide!
 
@@ -136,3 +139,5 @@ before the one to be deleted (value 'b')
 -> change the the next of index 1 to be the next of index 2
 -> decrement length
 -> return the value of the deleted node
+
+### BINARY SEARCH TREES

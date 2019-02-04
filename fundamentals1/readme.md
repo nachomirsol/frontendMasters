@@ -141,3 +141,65 @@ before the one to be deleted (value 'b')
 -> return the value of the deleted node
 
 ### BINARY SEARCH TREES
+
+Trees cans be a useful structure for a middle ground between LinkedLists and ArrayLists. We're going to look a simple flavor of trees: the trusty binary search tree. The gist of the BST is that a node in a BST has zero, one, or two subtrees. Every element in the left subtree is lesser than the value of the node and every node in the right is greater. By being able to depend on this fact, it makes it very simple to add and find new elements. Like LinkedLists, we just have to change pointers when we add new elements. Let's step through an add.
+Worse case when its sorted.
+
+```javascript
+Current Tree:
+      10
+    /   \
+  5      15
+ / \     /
+3   8   12
+
+-> .add is called with 7
+-> start at root (10)
+-> lesser than 10, go left to 5
+-> greater than 5, go right to 8
+-> lesser than 8, go left
+-> no element at left, create new node
+   and make it the left subtree of 8
+
+         10
+       /   \
+     5      15
+    / \     /
+   3   8   12
+      /
+     7
+```
+
+### AVL TREE
+
+Have another look...
+
+AVL tree are the answer to the problem that BST have: BST can easily get out of balance. Even if it's not the worst case scenario of ascending or descending lists being added, even a random distribution on numbers on a BST is going to pretty heavy in places.
+
+### HASH TABLES
+
+Hash tables are extremely powerful tools in modern CS and are used extensively in things like programming languages' underpinnings, databases, caches, etc. They do have some tradeoffs, namely potentially memory footprints and the need for complicated hashing but they have constant time (O(1)) lookups, deletes, and adds if you're doing a set or map.
+
+## FUNCTIONAL PROGRAMMING
+
+### Map
+
+Map is a higher order function. That is to say it takes in another function and has its own logic on how to apply that function.
+
+```javascript
+var array = [1, 2, 3, 4, 5];
+var transformed = array.map(function(num) {
+  return num + 1;
+});
+console.log(transformed); // [2,3,4,5,6]
+```
+
+### Reduce
+
+Reduce is really useful when you a have a list of values that you want to combine in some meaningful way down to one value. You'll often hear the term map/reduce thrown around in regards to data science; they're used a lot in that sense because you're taking large sets of data, doing some transformations on them to get them in a certain state, and then reducing them down to useful statistics.
+
+A reduce function involves a list it's being called, a function that does the reducing, the accumulator, and the seed value. The accumulator is the interim value that is passed into each call of the reducer function that the function then returns. The value returned is then passed into the next call of the reducer function on the next value. The seed value is the value of the first accumulator. If there's no seed value, the zero index in the array is the seed.
+
+### Filter
+
+The third tool on our functional tool belt is filter. Filter does exactly what it sounds like: it takes a list of items and pares out some of the items you don't need in the list. All you have to do is write a filter function that returns true if you want the item to stay in the list or false if you want it removed from the list. The returned result is a new list with just the items you returned true on.

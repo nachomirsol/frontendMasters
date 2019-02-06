@@ -97,4 +97,4 @@ function quickSort(arr) {
   }
   return [...quickSort(left), pivot, ...quickSort(right)];
 }
-quickSort(4, 1, 2, 7, 8, 6, 9, 3);
+quickSort([4, 1, 2, 7, 8, 6, 9, 3]);

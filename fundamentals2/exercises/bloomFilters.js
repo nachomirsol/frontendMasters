@@ -1,0 +1,3 @@
+// Hashing functions
+
+class BloomFilter {}

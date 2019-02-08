@@ -25,3 +25,48 @@ That's it!
 So when you add more items to a bloom filter, you'll increase your false positive rate. You can mitigate this by having a larger array, but you'll be trading off on having a larger memory footprint. You can also have more or less hashing functions, trading off on how quickly memory will fill up versus false positive rates.
 
 So let's build one!
+
+## Tree Traversal
+
+### Depth-first Traversal
+
+Trees are an essential part of storing data, or at computer scientists like to refer them as, data structures. Among their benefits is that they're optimized to be searchable. Occasionally you need to serialize the entire tree into a flat data structure. Today we'll show you how to do that.
+
+Let's start with one variant depth-first traversals: pre-order traversal. The basic gist is that for each of the nodes, you process the node (in our case, save it to an array since we're serializing this tree,) then process the left subtree and then the right tree. Let's write out that works.
+
+Given the above tree:
+
+1- Call our method (let's call it preorderTraverse) on the root node, 8.
+2- Add 8 to our array.
+3- Call preorderTraverse on the left child, 3.
+4- Add 3 to our array.
+5- Call preorderTraverse on the left child, 1.
+6- Add 1 to our array.
+7- Has no children, returns.
+8- Going back up the tree, we'll call preorderTraverse on 6.
+9- Add 6 to our array.
+10- Call preorderTraverse on the left child, 4.
+11- Add 4 to our array.
+12- No children, returns.
+13- Going back up the tree, we'll call preorderTraverse on 7.
+14- Add 7 to the array.
+So on and so forth.
+
+// preorder
+[8, 3, 1, 6, 4, 7, 10, 14, 13]
+
+// inorder
+[1, 3, 5, 6, 7, 8, 10, 13, 14]
+
+// postorder
+[1, 4, 7, 6, 3, 13, 14, 10, 8]
+
+### Breadth-first Traversal
+
+Now that you've done depth-first, let's tackle breadth-first. Breadth-first isn't recursive processing of subtrees like depth-first. Instead we want to process one layer at a time. Using the tree above, we want the resulting order to [8, 3, 10, 1, 6, 14, 4, 7, 13]. In other words, we start at the root, and slowly make our way "down" the tree.
+
+The way we accomplish this is using our old friend, the queue. If you want to review what queues are, check out the previous course's section on them here. The short of it is that queues are first-in first-out.
+
+What we're going to do is process the node, then add the left child to the queue and then add the right child to the queue. After that, we'll just dequeue an item off of the queue and call our function recursively on that node. You keep going until there's no items left in the queue.
+
+Let's do the exercise! This can be solved recursively or iteratively, with the iterative result being the preferred of the two.

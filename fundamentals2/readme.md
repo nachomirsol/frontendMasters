@@ -70,3 +70,7 @@ The way we accomplish this is using our old friend, the queue. If you want to re
 What we're going to do is process the node, then add the left child to the queue and then add the right child to the queue. After that, we'll just dequeue an item off of the queue and call our function recursively on that node. You keep going until there's no items left in the queue.
 
 Let's do the exercise! This can be solved recursively or iteratively, with the iterative result being the preferred of the two.
+
+## Pathfinding
+
+Its the way to find the best path from one point to another.

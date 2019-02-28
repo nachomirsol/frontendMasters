@@ -24,6 +24,18 @@ const findShortestPathLength = (maze, [xA, yA], [xB, yB]) => {
 
   visited[yA][xA].openedBy = BY_A;
   visited[yB][xB].openedBy = BY_B;
+
+  let aQueue = [visited[yA][xA]];
+  let BQueue = [visited[yB][xB]];
+
+  let iteration = 0;
+  while (aQueue.length && BQueue.length) {
+    iteration++;
+    const aNeighbors = aQueue.reduce((acc, neighbor) => {
+      return acc.concat(getNeighbors(visited, neighbor.x, neighbor.y));
+    });
+  }
+  return -1;
 };
 
 // We need a useful function to look for the next points up, left, right, bottom...

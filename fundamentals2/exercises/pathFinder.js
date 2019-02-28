@@ -9,7 +9,22 @@ const NO_ONE = 0;
 const BY_A = 1;
 const BY_B = 2;
 
-const findShortestPathLength = (maze, [xA, yA], [xB, yB]) => {};
+const findShortestPathLength = (maze, [xA, yA], [xB, yB]) => {
+  const visited = maze.map((row, y) => {
+    return row.map((point, x) => {
+      return {
+        closed: point === 1,
+        length: 0,
+        openedBy: NO_ONE,
+        x: x,
+        y: y
+      };
+    });
+  });
+
+  visited[yA][xA].openedBy = BY_A;
+  visited[yB][xB].openedBy = BY_B;
+};
 
 // We need a useful function to look for the next points up, left, right, bottom...
 const getNeighbors = (visited, x, y) => {
@@ -25,11 +40,17 @@ const getNeighbors = (visited, x, y) => {
   }
 
   if (x + 1 < visited[0].length && !visited[y][x + 1].closed) {
-    // up
+    // Bottom
     neightbors.push(visited[y][x + 1]);
+  }
+
+  if (x - 1 >= 0 && !visited[y][x - 1].closed) {
+    // Up
+    neightbors.push(visited[y][x - 1]);
   }
 
   return neighbors;
 };
 
 const byFour = [[2, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 2]];
+const arrayPosition = byFour[x][y];

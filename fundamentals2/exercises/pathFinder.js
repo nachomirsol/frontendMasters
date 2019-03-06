@@ -35,10 +35,33 @@ const findShortestPathLength = (maze, [xA, yA], [xB, yB]) => {
       return acc.concat(getNeighbors(visited, neighbor.x, neighbor.y));
     }, []);
 
+    aQueue = [];
+
     for (let i = 0; i < aNeighbors.length; i++) {
       const neighbor = aNeighbors[i];
       if (neighbor.openedBy === BY_B) {
         return neighbor.length + iteration;
+      } else if (neighbor.openedBy === NO_ONE) {
+        neighbor.length = iteration;
+        neighbor.openedBy = BY_A;
+        aQueue.push(neighbor);
+      }
+    }
+
+    const bNeighbors = aQueue.reduce((acc, neighbor) => {
+      return acc.concat(getNeighbors(visited, neighbor.x, neighbor.y));
+    }, []);
+
+    bQueue = [];
+
+    for (let i = 0; i < bNeighbors.length; i++) {
+      const neighbor = bNeighbors[i];
+      if (neighbor.openedBy === BY_A) {
+        return neighbor.length + iteration;
+      } else if (neighbor.openedBy === NO_ONE) {
+        neighbor.length = iteration;
+        neighbor.openedBy = BY_B;
+        bQueue.push(neighbor);
       }
     }
   }

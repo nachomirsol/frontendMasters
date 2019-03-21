@@ -1,4 +1,42 @@
-const findMostCommonTitle = (myId, getUser, degreesOfSeparation) => {};
+// you work for a professional social network. in this social network, a professional
+// can follow other people to see their updates (think Twitter for professionals.)
+// write a function that finds the job `title` that shows up most frequently given
+// a set of degree of separation from you. count the initial id's own job title in the total
+
+/*
+  parameters:
+  myId                - number    - the id of the user who is the root node
+  getUser             - function - a function that returns a user's object given an ID
+  degreesOfSeparation - number   - how many degrees of separation away to look on the graph
+*/
+
+const findMostCommonTitle = (myId, getUser, degreesOfSeparation) => {
+  let queue = [myId]; // first one is 30 for example
+  const seen = new Set();
+  const jobs = {};
+
+  for (let i = 0; i <= degreesOfSeparation; i++) {
+    queue = queue
+      .filter(id => !seen.has(id)) // first one do nothing because its the first one
+      .map(getUser) // {id:30, title: 'frontend developer'...}
+      .map(user => {
+        jobs[user.title] = jobs[user.title] ? jobs[user.title] + 1 : 1;
+        seen.add(user.id);
+        return user;
+      }) // same array as before but there were side effects
+      .map(users => user.connections) // [[1,2,3,4]]
+      .reduce((acc, users) => acc.concat(users)); // to flat array [1,2,3,4]
+  }
+
+  // jobs = {'dev':50,'designer:30'...}
+  return Object.keys(jobs)
+    .map(job => [job, jobs[job]])
+    .sort((a, b) => {
+      if (a[1] > b[1]) return -1;
+      if (a[1] < b[1]) return 1;
+      return 0;
+    })[0][0];
+};
 
 const list = [
   {

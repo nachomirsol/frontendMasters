@@ -25,7 +25,7 @@ user3.increment = function() {
   user3.score++;
 };
 
-// creating the object with a function without handcrafting each object
+// creating the object with a function without handcrafting each object, generic object
 function userCreator(name, score) {
   const newUser = {};
   newUser.name = name;

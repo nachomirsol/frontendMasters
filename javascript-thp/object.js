@@ -26,6 +26,7 @@ user3.increment = function() {
 };
 
 // creating the object with a function without handcrafting each object, generic object
+// Thats not so great because we call the function increment every time for each returned object
 function userCreator(name, score) {
   const newUser = {};
   newUser.name = name;
@@ -35,6 +36,29 @@ function userCreator(name, score) {
   };
   return newUser;
 }
+const user1 = userCreator("Nacho", 4);
+const user2 = userCreator("Lucia", 5);
+user1.increment();
+
+// A better aproach is to have a single function for all the users out of the object to save space in memory
+
+function userCreator(name, score) {
+  const newUser = {};
+  newUser.name = name;
+  newUser.score = score;
+
+  return newUser;
+}
+
+const userFunctionStore = {
+  increment: function() {
+    this.score++;
+  },
+  login: function() {
+    console.log("you are logged in");
+  }
+};
+
 const user1 = userCreator("Nacho", 4);
 const user2 = userCreator("Lucia", 5);
 user1.increment();

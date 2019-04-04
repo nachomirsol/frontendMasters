@@ -43,7 +43,7 @@ user1.increment();
 // A better aproach is to have a single function for all the users out of the object to save space in memory
 
 function userCreator(name, score) {
-  const newUser = {};
+  const newUser = Object.create(userFunctionStore); // here we keep a link
   newUser.name = name;
   newUser.score = score;
 
@@ -62,3 +62,9 @@ const userFunctionStore = {
 const user1 = userCreator("Nacho", 4);
 const user2 = userCreator("Lucia", 5);
 user1.increment();
+/*
+  First we declare function userCreator and keep it space in memory
+  Second we keep an object in to memory with 2 properties that are functions
+  Then we create the user 1 function which is keept memory and execution context in local memory with the parameters and the empty object
+  which links to the userFunctionStore function. Then we return the object with the values that links to the computer memory
+*/

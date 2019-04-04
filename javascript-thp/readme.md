@@ -102,3 +102,28 @@ const user1 = userCreator("Nacho", 4);
 const user2 = userCreator("Lucia", 5);
 user1.increment();
 ```
+
+### Constructor and keyword new
+
+```javascript
+const user1 = new UserCreator("Nacho", 5);
+```
+
+When we call the constructor function with new in front we automate 2 things:
+
+1. Create a new user object
+2. Return the new User Object
+
+Functions are objects and functions When javascript thinks in functions in a way they give us a little place (an object) into which we can store a function. Lets see an example
+
+```javascript
+function multiplyBy2(num) {
+  return num * 2;
+}
+
+multiplyBy2.stored = 5;
+multiplyBy2(3); // 6
+```
+
+First we declare function multiplyBy2 saved in global memory as a function-object combo {f} so when we use dot notation we access the object. We still can call the function whith ()
+Next line

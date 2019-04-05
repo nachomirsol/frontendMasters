@@ -68,3 +68,19 @@ user1.increment();
   Then we create the user 1 function which is keept memory and execution context in local memory with the parameters and the empty object
   which links to the userFunctionStore function. Then we return the object with the values that links to the computer memory
 */
+
+// Another solution
+function UserCreator(name, score) {
+  this.name = name;
+  this.score = score;
+}
+
+UserCreator.prototype.increment = function() {
+  this.score++;
+};
+UserCreator.prototype.login = function() {
+  console.log("login");
+};
+
+const user1 = new UserCreator("Eva", 9);
+user1.increment();

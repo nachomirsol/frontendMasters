@@ -126,4 +126,36 @@ multiplyBy2(3); // 6
 ```
 
 First we declare function multiplyBy2 saved in global memory as a function-object combo {f} so when we use dot notation we access the object. We still can call the function whith ()
-Next line
+When we declare a function automatically we get in the function object combo the property prototype (which is also an object)
+
+#### another solution
+
+```javascript
+function UserCreator(name, score) {
+  this.name = name;
+  this.score = score;
+}
+
+UserCreator.prototype.increment = function() {
+  this.score++;
+};
+UserCreator.prototype.login = function() {
+  console.log("login");
+};
+
+const user1 = new UserCreator("Eva", 9);
+user1.increment();
+```
+
+1. First of all we declare userCreator function in memory, which is a function + object that contains automatically prototype property, which is also an object (ímage of that draw). So prototype is an object property from the userCreator function-object combo.
+
+2. Second we look to the prototype object property and we store the increment method property and the login.
+
+3. We declare the constant user1, uninitialize in memory yet, we call user1 =new UserCreator() and we create a new execution context which has a lot of work done thank to the new keyword. In Local memory we Assign the arguments to the parameters but the new keyword makes for us some stuff(for example the this assignment to empty object in the local memory with the hidden property proto which is also alink to the userCreator.prototype object which is in global memory) Inside the auto created this object we have also the parameters with the arguments
+
+- Image from the whiteboard
+
+4. User1.increment(), We look for user1, we find it, then we look for the increment function, that its not inside user1, but it has the proto, which links to the prototype object from the userCreator function object, and there we find increment method, so we can execute it. That creates a new execution context, with its local and the this, which is generic, so that every user links to the same prototype.
+   The this points to the left side of the dot.
+
+- image for the execution context

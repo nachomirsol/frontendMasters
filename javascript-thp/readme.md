@@ -159,3 +159,72 @@ user1.increment();
    The this points to the left side of the dot.
 
 - image for the execution context
+
+```javascript
+function UserCreator(name, score) {
+  this.name = name;
+  this.score = score;
+}
+
+UserCreator.prototype.increment = function() {
+  function add1() {
+    this.score++;
+  }
+  add1(); // This points to window
+};
+UserCreator.prototype.login = function() {
+  console.log("login");
+};
+
+const user1 = new UserCreator("Eva", 9);
+user1.increment();
+```
+
+- In this case add1() has not dot object, so this points to window object.
+- To avoid this, we have flat arrow functions or (call,apply...)
+
+```javascript
+function UserCreator(name, score) {
+  this.name = name;
+  this.score = score;
+}
+
+UserCreator.prototype.increment = function() {
+  const add1 = () => {
+    this.score++;
+  };
+  add1(); // This points to window
+};
+UserCreator.prototype.login = function() {
+  console.log("login");
+};
+
+const user1 = new UserCreator("Eva", 9);
+user1.increment();
+```
+
+- Image of the flat arrow
+
+### Classes
+
+We are writting our shared methods separately from our object constructor itself (off in the User.prototype object)
+Other languages let us do this all in one place.
+Nothing changes under the hood, only you have the name class and everything is wrapped
+
+```javascript
+class UserCreator {
+  constructor(name, score) {
+    this.name = name;
+    this.score = score;
+  }
+  increment() {
+    this.score++;
+  }
+  login() {
+    console.log("login");
+  }
+}
+
+const user1 = new UserCreator("Nachal", 10);
+user1.increment();
+```

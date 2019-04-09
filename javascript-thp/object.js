@@ -84,3 +84,22 @@ UserCreator.prototype.login = function() {
 
 const user1 = new UserCreator("Eva", 9);
 user1.increment();
+
+// Case this points to window object
+function UserCreator(name, score) {
+  this.name = name;
+  this.score = score;
+}
+
+UserCreator.prototype.increment = function() {
+  function add1() {
+    this.score++;
+  }
+  add1();
+};
+UserCreator.prototype.login = function() {
+  console.log("login");
+};
+
+const user1 = new UserCreator("Eva", 9);
+user1.increment();

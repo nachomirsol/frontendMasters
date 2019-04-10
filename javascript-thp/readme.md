@@ -209,7 +209,21 @@ user1.increment();
 
 We are writting our shared methods separately from our object constructor itself (off in the User.prototype object)
 Other languages let us do this all in one place.
-Nothing changes under the hood, only you have the name class and everything is wrapped
+Nothing changes under the hood, only you have the name class and everything is wrapped.
+
+Javascript uses this proto link to give objects, functions and arrays as a bunch of bonus functionality. All objects by default have **proto**
+
+```javascript
+const obj = { num: 3 };
+obj.num; // 3
+obj.hasOwnProperty("num");
+Object.prototype;
+```
+
+- We create in memory an object with num:3 property value. Then we get the property with the value 3.
+- Next property is a function that takes as an argument the string num. We look for obj in global memory, we find it, then we look for hasOwnProperty, there is not, but it doesnt give up, looks for the hidden property **proto** which points to...next step
+- Automatically a function-object combo is created, which by default has the property prototype, which is another object that has the property hasOwnProperty, and other properties.
+- Image
 
 ```javascript
 class UserCreator {
@@ -228,3 +242,23 @@ class UserCreator {
 const user1 = new UserCreator("Nachal", 10);
 user1.increment();
 ```
+
+```javascript
+function multiplyBy2(num) {
+  return num;
+}
+multiplyBy2.toString(); // Where is the method
+
+Function.prototype; // {toString:FUNCTION, call:FUNCTION, bind: FUNCTION}
+
+multiplyBy2.hasOwnProperty("score"); // Where is the function
+Function.prototype.__proto__; // Object.property {hasOwnProperty: FUNCTION}
+```
+
+- First we declare the function-object combo multiplybY2 in global memory
+- we look for multiplyBy2 in global memory, we find it, because of the dot notation we look for the property toString, we dont find it but dont panic, because of being an object it has automatically the hidden propery **proto** that refers to specific functions.prototype object (call, apply...)
+- If i want to access multiplyBy2.hasOwnProperty, we look for multiplyBy2 in global memory, we find it, we look in its prototype, doesnt find it, but we look the proto, this points to prototype functions, doesnt find it but this prototype has its own proto wich points to the prototype object where we finally find it.
+- Image
+
+Arrays and functions are also objects, so they get access to all the functions in Objet.prototype but also more goodies.
+When javascript loads we have another function object combo, which has also prototype which has an object with a bunch of functions in it, like toString(), call(), bind(), apply()...

@@ -262,3 +262,22 @@ Function.prototype.__proto__; // Object.property {hasOwnProperty: FUNCTION}
 
 Arrays and functions are also objects, so they get access to all the functions in Objet.prototype but also more goodies.
 When javascript loads we have another function object combo, which has also prototype which has an object with a bunch of functions in it, like toString(), call(), bind(), apply()...
+
+### Subclassing
+
+When we have some objects with same properties and functionality but there are some new properties or functionality, we can do it, its called inheritance.
+For example user and paidUser, paidUser shares the same functionality and properties than user but has some other new stuff.
+
+- First line we create a function object combo in global memory
+- Next line we create an object userFunctions {} with properties sayname and increment as functions.
+- Create a const user1 (uninitialized), and this will be the return value of calling userCreator with their inputs so a new execution context is created.
+- properties name and score are now in local memory inside the execution context, and then the empty object newUser {} but has the hidden property **proto** that links to userFunctions, and the properties inside the object name:'nachal',score:'8'
+- the returns sends all this to global memory at the constant user1
+- Then user1.sayName, we look to the user 1, we find it, we look for sayName, doesnt find it but look the proto which points the userFunctions, and there is it.
+
+- After all that we save in global memory function paidUserCreator
+- Then we save in global object paidUserFunction with increaseBalance function. Here the **proto** is also hidden. would be great that this paidUser has access to user functions. To make the proto link to userFunctions, with:
+
+```javascript
+Object.setPrototypeOf(paidUserFunctions, userFunctions); // this way we link the proto to userfunctions
+```

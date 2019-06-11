@@ -1,5 +1,7 @@
 # Javascript: The hard parts of object oriented
 
+Objects allows us to store data and add functionality to that data, however we are going to see step by step how to improve the way to bundle everything with the OOP paradigm in order to improve performance and readability. We will see different ways to create objects.
+
 ## Creating an Object
 
 ### Literal and manually
@@ -17,7 +19,7 @@ user1.increment();
 
 ### object dot notation
 
-We create an empty object in memory and we fill it with properties, values and function
+We create an empty object in memory and we fill it with properties, values and function. Its another way to create objects, but still handcraft everything.
 
 ```javascript
 const user2 = {}; // create a const in memory, same position in memory with an empty object
@@ -52,7 +54,9 @@ After that we have the function and finally the return which is from the machine
 
 Thats not so great because we call the function increment every time for each returned object.
 Each time we create a new user, we make space in our computer's memory.
-Ideally we could store all that functions in a single object
+Ideally we could store all that functions in a single object.
+
+We call the execution context when we run a function, all the space to run the functions code, with its own or local memory. The return the object out to global constant setted in memory we use the "return"
 
 ```javascript
 function userCreator(name, score) {
@@ -203,10 +207,11 @@ const user1 = new UserCreator("Eva", 9);
 user1.increment();
 ```
 
-- Image of the flat arrow
+- Image of the flat arrow whith the this execution context
 
 ### Classes
 
+Javascript will take care of keeping methods in the prototype object with the class and constructor solution.
 We are writting our shared methods separately from our object constructor itself (off in the User.prototype object)
 Other languages let us do this all in one place.
 Nothing changes under the hood, only you have the name class and everything is wrapped.

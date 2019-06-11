@@ -26,7 +26,8 @@ user3.increment = function() {
 };
 
 // creating the object with a function without handcrafting each object, generic object
-// Thats not so great because we call the function increment every time for each returned object
+// Thats not so great because we call the function increment every time for each returned object,
+// Data will change every time but functions still the same so we are duplicating them each time, BAD PERFORMANCE
 function userCreator(name, score) {
   const newUser = {};
   newUser.name = name;
@@ -85,7 +86,7 @@ UserCreator.prototype.login = function() {
 const user1 = new UserCreator("Eva", 9);
 user1.increment();
 
-// Case this points to window object
+// Case this points to window object in add1()
 function UserCreator(name, score) {
   this.name = name;
   this.score = score;
@@ -101,5 +102,42 @@ UserCreator.prototype.login = function() {
   console.log("login");
 };
 
+const user1 = new UserCreator("Eva", 9);
+user1.increment();
+
+// Solving this scope issue with flat arrows, bind this lexically
+// now this points to the right side of the dot, to user1
+function UserCreator(name, score) {
+  this.name = name;
+  this.score = score;
+}
+
+UserCreator.prototype.increment = function() {
+  const add1 = () => {
+    this.score++;
+  };
+  add1();
+};
+UserCreator.prototype.login = function() {
+  console.log("login");
+};
+
+const user1 = new UserCreator("Eva", 9);
+user1.increment();
+
+// Avoid using prototype by using javascript classes and constructor
+class UserCreator {
+  constructor(name, score) {
+    this.name = name;
+    this.score = score;
+  }
+
+  increment() {
+    this.score++;
+  }
+  login() {
+    console.log("login");
+  }
+}
 const user1 = new UserCreator("Eva", 9);
 user1.increment();

@@ -1,3 +1,4 @@
+// Solution 2 handcraft
 function userCreator(name, score) {
   const newUser = Object.create(userFunctions);
   newUser.name = name;

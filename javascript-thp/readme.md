@@ -261,17 +261,20 @@ Function.prototype.__proto__; // Object.property {hasOwnProperty: FUNCTION}
 ```
 
 - First we declare the function-object combo multiplybY2 in global memory
-- we look for multiplyBy2 in global memory, we find it, because of the dot notation we look for the property toString, we dont find it but dont panic, because of being an object it has automatically the hidden propery **proto** that refers to specific functions.prototype object (call, apply...)
+- we look for multiplyBy2 in global memory, we find it, because of the dot notation we look for the property toString, we dont find it but dont panic, because of being an object it has automatically the hidden property \***\*proto\*\*** that refers to specific functions.prototype object (call, apply...)
 - If i want to access multiplyBy2.hasOwnProperty, we look for multiplyBy2 in global memory, we find it, we look in its prototype, doesnt find it, but we look the proto, this points to prototype functions, doesnt find it but this prototype has its own proto wich points to the prototype object where we finally find it.
 - Image
 
 Arrays and functions are also objects, so they get access to all the functions in Objet.prototype but also more goodies.
 When javascript loads we have another function object combo, which has also prototype which has an object with a bunch of functions in it, like toString(), call(), bind(), apply()...
+Depending on if we have an object or a function, proto links to object functionality or function functionality properties, but thanks to the proto we can reach it in any case.
 
 ### Subclassing
 
-When we have some objects with same properties and functionality but there are some new properties or functionality, we can do it, its called inheritance.
-For example user and paidUser, paidUser shares the same functionality and properties than user but has some other new stuff.
+subclassing img
+
+When we have some objects with same properties and functionality but there are some new properties or functionality, we can do it, its called **inheritance**.
+For example **user** and **paidUser**, paidUser shares the same functionality and properties that user but has some other new stuff.
 
 - First line we create a function object combo in global memory
 - Next line we create an object userFunctions {} with properties sayname and increment as functions.

@@ -271,7 +271,7 @@ Depending on if we have an object or a function, proto links to object functiona
 
 ### Subclassing
 
-subclassing img
+![subclassing](img/subclassing.png)
 
 When we have some objects with same properties and functionality but there are some new properties or functionality, we can do it, its called **inheritance**.
 For example **user** and **paidUser**, paidUser shares the same functionality and properties that user but has some other new stuff.

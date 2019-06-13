@@ -1,6 +1,7 @@
 # Javascript: The hard parts of object oriented
 
-Objects allows us to store data and add functionality to that data, however we are going to see step by step how to improve the way to bundle everything with the OOP paradigm in order to improve performance and readability. We will see different ways to create objects.
+Objects allows us to store data and add functionality to that data, however we are going to see step by step how to improve the way to bundle everything with the OOP paradigm in order to improve performance and readability. We will see different approaches.
+Main goal is to bundle data and functionallity
 
 ## Creating an Object
 
@@ -287,5 +288,5 @@ For example **user** and **paidUser**, paidUser shares the same functionality an
 - Then we save in global object paidUserFunction with increaseBalance function. Here the **proto** is also hidden. would be great that this paidUser has access to user functions. To make the proto link to userFunctions, with:
 
 ```javascript
-Object.setPrototypeOf(paidUserFunctions, userFunctions); // this way we link the proto to userfunctions
+Object.setPrototypeOf(paidUserFunctions, userFunctions); // this way we link the proto to userfunctions look at subClassing.js
 ```

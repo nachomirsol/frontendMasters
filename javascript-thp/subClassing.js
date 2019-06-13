@@ -67,6 +67,6 @@ paidUser1.sayName();
  * the key values arguments. Then returns the object newPaidUser to the function paidUserCreator with non usable proto because it links
  * to userFunctions
  * 10- We link the proto to the paidUserFunctions.
- * 11- Then we add a property accountBalance
+ * 11- Then we add a property accountBalance and return the object with the proto linking to paidUserFunctions
  
  */

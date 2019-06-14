@@ -290,3 +290,34 @@ For example **user** and **paidUser**, paidUser shares the same functionality an
 ```javascript
 Object.setPrototypeOf(paidUserFunctions, userFunctions); // this way we link the proto to userfunctions look at subClassing.js
 ```
+
+- The solution 2 (subClassing_2.js) is really handcrafted but its how subclassing works under the hood.
+
+- Solution 3 helps a bit with the new keyword
+
+### Call and Apply
+
+```javascript
+const obj = {
+  num: 3,
+  increment: function() {
+    this.num++;
+  }
+};
+const otherObj = {
+  num: 10
+};
+obj.increment();
+obj.increment.call(otherObj);
+```
+
+- First we define the obj in global memory with its properties and values
+- Then we do the same with otherObj
+- obj.increment() we look for obj in global memory, we find it and we run the function so this creates the execution context
+  ![subclassing](img/call_apply_1.png)
+  ¿What happens if we want to have the increment functions also in otherObj?
+  Easy, pointing the this to the otherObj object manually with **Call**
+- obj.increment.call(otherObj) we look for obj in global memory, then we look to the increment function object combo, where its the hidden property \***\*proto\*\*** that links to a function which is a function object combo where we find the prototype where its the call function. This creates an execution context in local memory where now this points to otherObj.
+
+![subclassing](img/call_apply_2.png)
+As the **call** method could expect 2 arguments, **apply** has only one which can be an array.
